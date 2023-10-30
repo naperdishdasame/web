@@ -1,5 +1,6 @@
 package ru.netology.webselenium;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -40,7 +41,7 @@ public class CardOrderingTest {
 
     @ParameterizedTest
 
-    void shouldCardForm(String name, String phone, String expected) {
+    void shouldcardform(String name, String phone, String expected) {
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys(name);
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys(phone);
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
@@ -52,7 +53,7 @@ public class CardOrderingTest {
     }
 
     @Test
-    void shouldCardFormInvalidName() {
+    void shouldcardforminvalidname() {
         List<WebElement> elements = driver.findElements(By.className("input__control"));
         elements.get(0).sendKeys("Sam Fisher"); // Имя набрано латиницей
         elements.get(1).sendKeys("+79933843802");
@@ -66,7 +67,7 @@ public class CardOrderingTest {
     }
 
     @Test
-    void shouldCardFormInvalidPhone() {
+    void shouldcardforminvalidphone() {
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Сэм Фишер");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79933843802"); // В номере телефона вместо 0 написано O
         driver.findElement(By.className("button")).click();
@@ -78,7 +79,7 @@ public class CardOrderingTest {
     }
 
     @Test
-    void shouldCardFormWithoutName() { // В заявке отсутствует имя
+    void shouldcardformwithoutname() { // В заявке отсутствует имя
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79933843802");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
         driver.findElement(By.className("button")).click();
@@ -90,7 +91,7 @@ public class CardOrderingTest {
     }
 
     @Test
-    void shouldCardFormWithoutPhone() { // В заявке отсутствует номер телефона
+    void shouldcardformwithoutphone() { // В заявке отсутствует номер телефона
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Сэм Фишер");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
         driver.findElement(By.className("button")).click();
@@ -102,7 +103,7 @@ public class CardOrderingTest {
     }
 
     @Test
-    void shouldCardFormWithoutCheckbox() { // В заявке не проставлен чек-бокс
+    void shouldcardformwithoutcheckbox() { // В заявке не проставлен чек-бокс
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Сэм Фишер");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79933843802");
         driver.findElement(By.className("button")).click();

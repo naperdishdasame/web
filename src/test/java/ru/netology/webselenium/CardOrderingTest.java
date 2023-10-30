@@ -39,21 +39,9 @@ public class CardOrderingTest {
         driver = null;
     }
 
-    @ParameterizedTest
-
-    void shouldcardform(String name, String phone, String expected) {
-        driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys(name);
-        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys(phone);
-        driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
-        driver.findElement(By.className("button")).click();
-
-        String actual = driver.findElement(By.cssSelector("[data-test-id=order-success]")).getText().trim();
-
-        assertEquals(expected, actual);
-    }
 
     @Test
-    void shouldcardforminvalidname() {
+    void ShouldCardFormInvalidName() {
         List<WebElement> elements = driver.findElements(By.className("input__control"));
         elements.get(0).sendKeys("Sam Fisher"); // Имя набрано латиницей
         elements.get(1).sendKeys("+79933843802");
@@ -67,19 +55,20 @@ public class CardOrderingTest {
     }
 
     @Test
-    void shouldcardforminvalidphone() {
+    void ShouldCardFormInvalidphone() {
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Сэм Фишер");
-        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79933843802"); // В номере телефона вместо 0 написано O
+        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+89933842456489741561674897");
+        driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
         driver.findElement(By.className("button")).click();
 
-        String expected = "Телефон указан неверно. Должно быть 11 цифр, например, +79933843802.";
+        String expected = "Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.";
         String actual = driver.findElement(By.cssSelector("[data-test-id=phone].input_invalid .input__sub")).getText().trim();
 
         assertEquals(expected, actual);
     }
 
     @Test
-    void shouldcardformwithoutname() { // В заявке отсутствует имя
+    void ShouldCardFormWithoutName() { // В заявке отсутствует имя
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79933843802");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
         driver.findElement(By.className("button")).click();
@@ -91,7 +80,7 @@ public class CardOrderingTest {
     }
 
     @Test
-    void shouldcardformwithoutphone() { // В заявке отсутствует номер телефона
+    void ShouldCardFormWithoutPhone() { // В заявке отсутствует номер телефона
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Сэм Фишер");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
         driver.findElement(By.className("button")).click();
@@ -103,7 +92,7 @@ public class CardOrderingTest {
     }
 
     @Test
-    void shouldcardformwithoutcheckbox() { // В заявке не проставлен чек-бокс
+    void ShouldCardFormWithOutCheckbox() { // В заявке не проставлен чек-бокс
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Сэм Фишер");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79933843802");
         driver.findElement(By.className("button")).click();

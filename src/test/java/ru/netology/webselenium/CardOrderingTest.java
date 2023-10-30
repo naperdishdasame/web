@@ -14,7 +14,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CardOrderingTest {
+public class CardOrderingTest {
     private WebDriver driver;
 
     @BeforeAll
@@ -71,7 +71,7 @@ class CardOrderingTest {
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79933843802"); // В номере телефона вместо 0 написано O
         driver.findElement(By.className("button")).click();
 
-        String expected = "Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.";
+        String expected = "Телефон указан неверно. Должно быть 11 цифр, например, +79933843802.";
         String actual = driver.findElement(By.cssSelector("[data-test-id=phone].input_invalid .input__sub")).getText().trim();
 
         assertEquals(expected, actual);
